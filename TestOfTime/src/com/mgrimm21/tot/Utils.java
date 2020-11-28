@@ -1,29 +1,39 @@
 package com.mgrimm21.tot;
 
+import java.awt.GraphicsEnvironment;
 import java.io.File;
-import java.io.IOException;
 
 public class Utils {
 	
 	public static final String USER = System.getProperty("user.name");
 	public static final String PATH = "C:\\Users\\" + USER + "\\TestOfTime";
-	public static final String PATH_SETTINGS = PATH + "\\settings.tot";
+	public static final String PATH_CONFIGS = PATH + "\\Configs";
+	public static final String PATH_LOGS = PATH + "\\Logs";
+	
+	public static Configuration settings;
 
-	public static void checkFiles() {
+	public static void setupFiles() {
 		File file = new File(PATH);
-		if (!file.exists()) {
-			file.mkdirs();
-			Logger.log(Logger.INFO, "Directory not found, creating now");
+		file.mkdirs();
+		file = new File(PATH_CONFIGS);
+		file.mkdir();
+		file = new File(Utils.PATH_LOGS);
+		file.mkdir();
+		settings = new Configuration("settings.tot");
+		setDefaults();
+	}
+	
+	private static void setDefaults() {
+		if (!settings.exists("width")) {
+			settings.set("width", GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth());
 		}
-		file = new File(PATH_SETTINGS);
-		if (!file.exists()) {
-			try {
-				Logger.log(Logger.INFO, "Settings not found, creating now");
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		if (!settings.exists("height")) {
+			settings.set("height", GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight());
 		}
 	}
-
+	
+	public static void forceDefaults() {
+		settings.reset();
+		setDefaults();
+	}
 }
