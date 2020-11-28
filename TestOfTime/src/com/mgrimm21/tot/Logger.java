@@ -16,7 +16,6 @@ public class Logger {
 	public static final int FATAL = 5;
 	public static final int OFF = 6;
 	private static final String[] LEVEL_NAMES = new String[] {"ALL","DEBUG","INFO","WARN","ERROR","FATAL"};
-	private static final Logger LOGGER = new Logger();
 	private static int loggerLevel = 4;
 	private static File file;
 	
@@ -32,10 +31,6 @@ public class Logger {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static Logger getLogger() {
-		return LOGGER;
 	}
 	
 	public static void log(final int LEVEL, String log) {
