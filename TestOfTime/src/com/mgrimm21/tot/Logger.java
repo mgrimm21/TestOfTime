@@ -20,11 +20,9 @@ public class Logger {
 	private static File file;
 	
 	static {
-		File logFile = new File(Utils.PATH + "\\logs");
-		logFile.mkdir();
 		SimpleDateFormat formatter= new SimpleDateFormat("MM-dd-yyyy-HH-mm-ss");
 		Date date = new Date(System.currentTimeMillis());
-		logFile = new File(Utils.PATH + "\\logs\\" + formatter.format(date) + ".tot");
+		File logFile = new File(Utils.PATH + "\\logs\\" + formatter.format(date) + ".tot");
 		try {
 			logFile.createNewFile();
 			file = logFile;
