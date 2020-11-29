@@ -19,6 +19,7 @@ public class TestOfTime extends Canvas implements Runnable{
 	private int width, height;
 	private Keyboard keyboard = new Keyboard();
 	private Mouse mouse = new Mouse();
+	private SceneManager sceneManager = new SceneManager();
 	
 	public TestOfTime() {
 		width = Utils.settings.getInt("width");
@@ -45,6 +46,7 @@ public class TestOfTime extends Canvas implements Runnable{
 		keyboard.tick();
 		mouse.tick();
 		if(keyboard.isKeyDown(KeyEvent.VK_ESCAPE)) System.exit(0);
+		sceneManager.tick();
 	}
 	
 	private void render() {
@@ -57,7 +59,7 @@ public class TestOfTime extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
-		
+		sceneManager.render(g);
 		bs.show();
 		g.dispose();
 	}
