@@ -9,16 +9,15 @@ public class SceneManager {
 	private Scene activeScene;
 	private String activeSceneName;
 	
-	public SceneManager(String startingSceneName, Scene startingScene) {
-		activeScene = startingScene;
+	public SceneManager() {
 	}
 	
 	public void tick() {
-		activeScene.tick();
+		if (activeScene!= null) activeScene.tick();
 	}
 	
 	public void render(Graphics g) {
-		activeScene.render(g);
+		if (activeScene!= null) activeScene.render(g);
 	}
 	
 	public void addScene(String name, Scene scene) {
